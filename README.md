@@ -1,8 +1,8 @@
-![Pixel art of a desk at night: ByeClicky's blue cursor on the Mac, Dynisland in the notch and Tracker on the phone](art/desk.gif)
+![Pixel art of a desk at night: ByeClicky's blue cursor on the Mac, Dynisland in the notch, Tracker on the phone and Senso on the watch](art/desk.gif)
 
 <sub>My desk at night, in pixels. ByeClicky is the blue cursor on the Mac, Dynisland lives in the
-notch and Tracker is on the phone. Drawn from code with a small Python script, no libraries
-([source](art/make_art.py)).</sub>
+notch, Tracker is on the phone and Senso is on the watch. Drawn from code with a small Python
+script, no libraries ([source](art/make_art.py)).</sub>
 
 ## Hey! 👋
 
@@ -12,7 +12,7 @@ I'm **Alessandro**, a student at the Apple Developer Academy. I make Mac and iPh
 
 # 🛠 What I'm building
 
-### <img src="assets/byeclicky.png" width="30"> [ByeClicky →](https://github.com/AleSignorile12/ByeClicky)
+### <img src="assets/byeclicky.png" width="30"> ByeClicky
 
 A little assistant that sits next to your cursor. You hold Control + Option, ask it something, and
 it looks at your screen and points at the right button. It runs locally with Ollama, so nothing
@@ -21,6 +21,16 @@ leaves your Mac.
 *Swift · SwiftUI · ScreenCaptureKit · Speech · Ollama*
 
 ![ByeClicky: you ask where Share is, and the blue cursor flies to the Share button](art/byeclicky.gif)
+
+### <img src="assets/senso.png" width="30"> Senso
+
+An iPhone and Apple Watch app that helps blind and low-vision people pour a drink without
+overflowing the cup. It listens to the pour with an on-device sound model, says how full the glass
+is as you go, and tells you when to stop.
+
+*SwiftUI · Core ML · AVFoundation · App Intents · watchOS*
+
+![Senso: water pours into a glass, the phone fills up and calls out 25, 50, 75 percent, then says STOP](art/senso.gif)
 
 ### <img src="assets/dynisland.png" width="30"> Dynisland
 
@@ -44,4 +54,4 @@ missing, birthdays, and an offline translator for talking with kids who speak an
 
 # 💻 Tech stack
 
-![Swift](https://img.shields.io/badge/Swift-F05138?style=for-the-badge&logo=swift&logoColor=white) ![SwiftUI](https://img.shields.io/badge/SwiftUI-0071E3?style=for-the-badge&logo=swift&logoColor=white) ![AppKit](https://img.shields.io/badge/AppKit-2C2C2E?style=for-the-badge) ![SwiftData](https://img.shields.io/badge/SwiftData-0A84FF?style=for-the-badge) ![AVFoundation](https://img.shields.io/badge/AVFoundation-3A3A3C?style=for-the-badge) ![ScreenCaptureKit](https://img.shields.io/badge/ScreenCaptureKit-1C1C1E?style=for-the-badge) ![Xcode](https://img.shields.io/badge/Xcode-147EFB?style=for-the-badge&logo=xcode&logoColor=white) ![Ollama](https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white) ![CocoaPods](https://img.shields.io/badge/CocoaPods-EE3322?style=for-the-badge&logo=cocoapods&logoColor=white)
+![Swift](https://img.shields.io/badge/Swift-F05138?style=for-the-badge&logo=swift&logoColor=white) ![SwiftUI](https://img.shields.io/badge/SwiftUI-0071E3?style=for-the-badge&logo=swift&logoColor=white) ![AppKit](https://img.shields.io/badge/AppKit-2C2C2E?style=for-the-badge) ![SwiftData](https://img.shields.io/badge/SwiftData-0A84FF?style=for-the-badge) ![Core ML](https://img.shields.io/badge/Core%20ML-8E1600?style=for-the-badge) ![watchOS](https://img.shields.io/badge/watchOS-1C1C1E?style=for-the-badge) ![AVFoundation](https://img.shields.io/badge/AVFoundation-3A3A3C?style=for-the-badge) ![ScreenCaptureKit](https://img.shields.io/badge/ScreenCaptureKit-1C1C1E?style=for-the-badge) ![Xcode](https://img.shields.io/badge/Xcode-147EFB?style=for-the-badge&logo=xcode&logoColor=white) ![Ollama](https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white) ![CocoaPods](https://img.shields.io/badge/CocoaPods-EE3322?style=for-the-badge&logo=cocoapods&logoColor=white)

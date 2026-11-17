@@ -33,9 +33,13 @@ PALETTE = [
     "#B5703F",  # WOOD2
     "#FF4F6D",  # PINK
     "#3FD07A",  # GREEN
+    "#840E08",  # CRIMSON  Senso
+    "#C9E7F6",  # SKYC     Senso
+    "#D9F1FD",  # MIST     Senso
 ]
 (INK, WALL, WALL2, FRAME, SKY, GLOW, WHITE, BLUE,
- ALU, ALU2, BLACK, AMBER, WOOD, WOOD2, PINK, GREEN) = range(16)
+ ALU, ALU2, BLACK, AMBER, WOOD, WOOD2, PINK, GREEN,
+ CRIMSON, SKYC, MIST) = range(19)
 
 BAYER = [[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]]
 
@@ -55,7 +59,7 @@ FONT = {
     "6": ".##|#..|###|#.#|###", "7": "###|..#|.#.|.#.|.#.", "8": "###|#.#|###|#.#|###",
     "9": "###|#.#|###|..#|##.", ":": "...|.#.|...|.#.|...", "?": "##.|..#|.#.|...|.#.",
     ".": "...|...|...|...|.#.", "!": ".#.|.#.|.#.|...|.#.", "'": ".#.|.#.|...|...|...",
-    "-": "...|...|###|...|...", "E2": ".##|##.|#..|##.|.##", " ": "...|...|...|...|...",
+    "-": "...|...|###|...|...", "%": "#.#|..#|.#.|#..|#.#", "E2": ".##|##.|#..|##.|.##", " ": "...|...|...|...|...",
 }
 FONT["€"] = FONT.pop("E2")
 
@@ -256,10 +260,10 @@ def write_gif(path, frames, scale, delay_cs):
         else:
             seq.append([f, delay_cs])
     w, h = frames[0].w, frames[0].h
-    bits = 4
+    bits = max(2, (len(PALETTE) - 1).bit_length())
     out = bytearray(b"GIF89a")
     out += struct.pack("<HHBBB", w * scale, h * scale, 0x80 | 0x70 | (bits - 1), 0, 0)
-    for hx in PALETTE:
+    for hx in PALETTE + ["#000000"] * ((1 << bits) - len(PALETTE)):
         out += bytes.fromhex(hx[1:])
     out += b"\x21\xff\x0bNETSCAPE2.0\x03\x01\x00\x00\x00"
     prev = None
@@ -536,6 +540,20 @@ def desk(i, n):
             c.box(128, ry, 3, 3, ALU)
         c.rect(132, ry + 1, 5 - (k % 2), 1, ALU)
     confetti(c, t, 2.3, 132, 36)
+
+    # Senso on the watch: the crimson liquid rises to the stop line, then resets
+    c.rect(147, 53, 5, 3, ALU2)
+    c.rect(147, 65, 5, 3, ALU2)
+    c.rrect(145, 55, 9, 11, ALU2)
+    c.rect(146, 56, 7, 9, BLACK)
+    c.rect(147, 57, 5, 7, MIST)
+    level = 0.9 * ease_io(ph(t, 0.3, 3.8)) if t < 4.8 else 0.0
+    top = 64 - level * 7
+    for x in range(147, 152):
+        wave = 0.6 * math.sin(x * 1.3 + t * 6)
+        y0 = round(top + wave)
+        if y0 < 64:
+            c.rect(x, max(57, y0), 1, 64 - max(57, y0), CRIMSON)
     return c
 
 
@@ -791,6 +809,115 @@ def tracker(i, n):
     return c
 
 
+# ------------------------------------------------------------------- Senso --
+def bottle(c, cx, cy, ang):
+    """A water bottle rotated by ang around its middle."""
+    sn, co = math.sin(ang), math.cos(ang)
+    for y in range(int(cy) - 22, int(cy) + 23):
+        for x in range(int(cx) - 22, int(cx) + 23):
+            dx, dy = x - cx, y - cy
+            u, v = dx * co + dy * sn, -dx * sn + dy * co
+            col = None
+            if abs(u) <= 4.5 and -11 <= v <= 11:
+                edge = abs(u) > 3.5 or abs(v) > 10
+                col = WHITE if edge else BLUE if -2 <= v <= 3 else GLOW
+            elif abs(u) <= 2 and -17 <= v < -11:
+                col = WHITE
+            elif abs(u) <= 2.5 and -19.5 <= v < -17:
+                col = BLUE
+            if col is not None:
+                c.set(x, y, col)
+
+
+def senso_screen(t, pct):
+    s = Canvas(24, 56, MIST)
+    s.rrect(9, 1, 6, 2, BLACK)
+    if t < 0.6:
+        s.text(0, 6, "READY?", CRIMSON)
+        r = 8 if 0.45 <= t < 0.6 else 9
+        s.disc(12, 30, r, CRIMSON)
+        s.text(5, 25, "FILL", SKYC)
+        s.text(7, 31, "UP!", SKYC)
+        for x in range(24):
+            y0 = 51 + round(1.2 * math.sin(x * 0.5 + t * 5))
+            s.rect(x, y0, 1, 56 - y0, CRIMSON)
+        return s
+    top = 55 - pct / 100 * 38
+    for x in range(24):
+        y0 = round(top + 1.2 * math.sin(x * 0.45 + t * 7))
+        s.rect(x, max(4, y0), 1, 56 - max(4, y0), CRIMSON)
+    if t < 5.0:
+        label = f"{int(pct)}%"
+        s.text((24 - text_w(label, 2)) // 2, 5, label, CRIMSON, scale=2)
+    else:
+        s.text(2, 6, "DONE!", CRIMSON)
+        s.text(4, 32, "FULL", SKYC)
+    return s
+
+
+def senso(i, n):
+    T = 7.2
+    t = i / n * T
+    c = Canvas(128, 80)
+    for y in range(80):
+        for x in range(128):
+            v = y + 4 * math.sin(x * 0.07)
+            c.set(x, y, gradient(v, x, y, [(4, SKY), (22, FRAME), (50, WALL2), (76, WALL)]))
+    c.rect(0, 68, 128, 12, WOOD)
+    c.rect(0, 68, 128, 1, WOOD2)
+
+    pct = 90 * ph(t, 1.4, 4.8)
+
+    # the phone running Senso
+    c.rrect(10, 6, 30, 62, ALU2, r=3)
+    c.rrect(11, 7, 28, 60, BLACK, r=3)
+    c.blit(senso_screen(t, pct), 13, 9, (13, 9, 37, 65))
+
+    # the glass fills with the pour
+    c.rect(78, 42, 1, 26, WHITE)
+    c.rect(97, 42, 1, 26, WHITE)
+    c.rect(78, 66, 20, 2, WHITE)
+    surface = round(65 - pct / 100 * 22)
+    for y in range(surface, 66):
+        c.rect(79, y, 18, 1, WHITE if y == surface else GLOW)
+
+    # the bottle tips, pours, and stands back up
+    rest, pour = (114, 56, 0.0), (106.9, 20.3, math.radians(-120))
+    if t < 0.8 or t >= 5.5:
+        bx, by, ba = rest
+    elif t < 1.3:
+        e = ease_io(ph(t, 0.8, 1.3))
+        bx, by, ba = (lerp(r, p, e) for r, p in zip(rest, pour))
+    elif t < 5.0:
+        bx, by, ba = pour
+    else:
+        e = ease_io(ph(t, 5.0, 5.5))
+        bx, by, ba = (lerp(p, r, e) for r, p in zip(rest, pour))
+    if 1.3 <= t < 5.1:
+        top = 31 if t < 4.85 else 31 + (t - 4.85) * 140
+        bottom = min(surface - 1, 31 + (t - 1.3) * 300)
+        for y in range(round(top), round(bottom) + 1):
+            c.set(90, y, WHITE if (y + i * 2) % 5 == 0 else GLOW)
+        if t < 4.85 and bottom >= surface - 1:
+            c.set(88 - i % 2, surface - 1, WHITE)
+            c.set(92 + i % 2, surface - 1, WHITE)
+    bottle(c, bx, by, ba)
+
+    # Senso speaks the progress, then says stop
+    said = None
+    for mark, at in ((25, 2.34), (50, 3.29), (75, 4.23)):
+        if at <= t < at + 0.65:
+            said = (f"{mark}%", WHITE, INK)
+    if 4.8 <= t < 5.9:
+        said = ("STOP!", CRIMSON, WHITE)
+    if said:
+        msg, bg, fg = said
+        w = text_w(msg) + 6
+        c.rrect(45, 14, w, 9, bg)
+        c.rect(43, 18, 2, 1, bg)
+        c.text(48, 16, msg, fg)
+    return c
+
 # -------------------------------------------------------------------- main --
 def render(name, fn, n, scale, delay_cs=8):
     frames = [fn(i, n) for i in range(n)]
@@ -803,3 +930,4 @@ if __name__ == "__main__":
     render("byeclicky", byeclicky, 80, 5)
     render("dynisland", dynisland, 80, 5)
     render("tracker", tracker, 90, 4)
+    render("senso", senso, 90, 5)
