@@ -33,13 +33,13 @@ PALETTE = [
     "#B5703F",  # WOOD2
     "#FF4F6D",  # PINK
     "#3FD07A",  # GREEN
-    "#840E08",  # CRIMSON  Senso
+    "#009EF8",  # SENSO    Senso blue
     "#C9E7F6",  # SKYC     Senso
     "#D9F1FD",  # MIST     Senso
 ]
 (INK, WALL, WALL2, FRAME, SKY, GLOW, WHITE, BLUE,
  ALU, ALU2, BLACK, AMBER, WOOD, WOOD2, PINK, GREEN,
- CRIMSON, SKYC, MIST) = range(19)
+ SENSO, SKYC, MIST) = range(19)
 
 BAYER = [[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]]
 
@@ -541,7 +541,7 @@ def desk(i, n):
         c.rect(132, ry + 1, 5 - (k % 2), 1, ALU)
     confetti(c, t, 2.3, 132, 36)
 
-    # Senso on the watch: the crimson liquid rises to the stop line, then resets
+    # Senso on the watch: Senso's blue liquid rises to the stop line, then resets
     c.rect(147, 53, 5, 3, ALU2)
     c.rect(147, 65, 5, 3, ALU2)
     c.rrect(145, 55, 9, 11, ALU2)
@@ -553,7 +553,7 @@ def desk(i, n):
         wave = 0.6 * math.sin(x * 1.3 + t * 6)
         y0 = round(top + wave)
         if y0 < 64:
-            c.rect(x, max(57, y0), 1, 64 - max(57, y0), CRIMSON)
+            c.rect(x, max(57, y0), 1, 64 - max(57, y0), SENSO)
     return c
 
 
@@ -833,25 +833,25 @@ def senso_screen(t, pct):
     s = Canvas(24, 56, MIST)
     s.rrect(9, 1, 6, 2, BLACK)
     if t < 0.6:
-        s.text(0, 6, "READY?", CRIMSON)
+        s.text(0, 6, "READY?", SENSO)
         r = 8 if 0.45 <= t < 0.6 else 9
-        s.disc(12, 30, r, CRIMSON)
-        s.text(5, 25, "FILL", SKYC)
-        s.text(7, 31, "UP!", SKYC)
+        s.disc(12, 30, r, SENSO)
+        s.text(5, 25, "FILL", WHITE)
+        s.text(7, 31, "UP!", WHITE)
         for x in range(24):
             y0 = 51 + round(1.2 * math.sin(x * 0.5 + t * 5))
-            s.rect(x, y0, 1, 56 - y0, CRIMSON)
+            s.rect(x, y0, 1, 56 - y0, SENSO)
         return s
     top = 55 - pct / 100 * 38
     for x in range(24):
         y0 = round(top + 1.2 * math.sin(x * 0.45 + t * 7))
-        s.rect(x, max(4, y0), 1, 56 - max(4, y0), CRIMSON)
+        s.rect(x, max(4, y0), 1, 56 - max(4, y0), SENSO)
     if t < 5.0:
         label = f"{int(pct)}%"
-        s.text((24 - text_w(label, 2)) // 2, 5, label, CRIMSON, scale=2)
+        s.text((24 - text_w(label, 2)) // 2, 5, label, SENSO, scale=2)
     else:
-        s.text(2, 6, "DONE!", CRIMSON)
-        s.text(4, 32, "FULL", SKYC)
+        s.text(2, 6, "DONE!", SENSO)
+        s.text(4, 32, "FULL", WHITE)
     return s
 
 
@@ -909,7 +909,7 @@ def senso(i, n):
         if at <= t < at + 0.65:
             said = (f"{mark}%", WHITE, INK)
     if 4.8 <= t < 5.9:
-        said = ("STOP!", CRIMSON, WHITE)
+        said = ("STOP!", SENSO, WHITE)
     if said:
         msg, bg, fg = said
         w = text_w(msg) + 6
