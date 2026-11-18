@@ -24,7 +24,7 @@ PALETTE = [
     "#3E5C8A",  # SKY
     "#7FA6D9",  # GLOW
     "#E8F1FF",  # WHITE
-    "#3F96FF",  # BLUE   ByeClicky's cursor
+    "#3F96FF",  # BLUE
     "#9AA3B5",  # ALU    aluminium
     "#5D6678",  # ALU2
     "#000000",  # BLACK  notch, bezels
@@ -36,10 +36,11 @@ PALETTE = [
     "#009EF8",  # SENSO    Senso blue
     "#C9E7F6",  # SKYC     Senso
     "#D9F1FD",  # MIST     Senso
+    "#3380FF",  # BYE      ByeClicky's cursor, same blue as the app
 ]
 (INK, WALL, WALL2, FRAME, SKY, GLOW, WHITE, BLUE,
  ALU, ALU2, BLACK, AMBER, WOOD, WOOD2, PINK, GREEN,
- SENSO, SKYC, MIST) = range(19)
+ SENSO, SKYC, MIST, BYE) = range(20)
 
 BAYER = [[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]]
 
@@ -319,7 +320,7 @@ def cursor(c, tx, ty, big=False):
             for di, dj in ((1, 0), (-1, 0), (0, 1), (0, -1)):
                 if (i + di, j + dj) not in pts:
                     c.set(tx + i + di, ty - oy + j + dj, GLOW)
-    c.sprite(tx, ty - oy, rows, BLUE)
+    c.sprite(tx, ty - oy, rows, BYE)
 
 
 def click_ring(c, tx, ty, p, r_max=4):
@@ -474,7 +475,7 @@ def desk(i, n):
         c.rect(x, y, w, 1, ALU)
     hover = 1.4 <= t < 3.6
     pressed = 1.4 <= t < 1.55
-    c.rect(89, 48, 12, 4, FRAME if pressed else BLUE if hover else ALU)
+    c.rect(89, 48, 12, 4, FRAME if pressed else BYE if hover else ALU)
     c.rect(92, 49, 6, 1, WHITE)
     c.rect(92, 50, 4, 1, WHITE)
 
@@ -496,8 +497,8 @@ def desk(i, n):
     click_ring(c, tx, ty, ph(t, 1.4, 1.8))
     cursor(c, tx, ty)
     if 1.8 <= t < 3.5:
-        c.rrect(96, 39, 15, 7, BLUE)
-        c.set(104, 46, BLUE)
+        c.rrect(96, 39, 15, 7, BYE)
+        c.set(104, 46, BYE)
         dots = 1 + int((t - 1.8) / 0.22) % 3
         for d in range(dots):
             c.set(100 + d * 3, 42, WHITE)
@@ -568,7 +569,7 @@ def byeclicky(i, n):
             c.set(x, y, gradient(v, x, y, [(4, SKY), (18, FRAME), (40, WALL2), (66, WALL)]))
     c.rect(0, 0, 128, 7, WALL)
     c.text(4, 1, "FINDER  FILE  EDIT", WHITE)
-    c.sprite(103, 1, ["..#", ".##", "###", ".##", "..#"], BLUE)
+    c.sprite(103, 1, ["..#", ".##", "###", ".##", "..#"], BYE)
     c.text(112, 1, "9:41", WHITE)
 
     # Finder window
@@ -582,10 +583,10 @@ def byeclicky(i, n):
     for bx, icon in ((66, GRID), (76, SHARE), (86, TAG)):
         lit = hover and icon is SHARE
         c.rrect(bx, 13, 9, 7, WHITE if lit else ALU)
-        c.sprite(bx + 2, 14, icon, BLUE if lit else ALU2)
+        c.sprite(bx + 2, 14, icon, BYE if lit else ALU2)
     for k in range(8):
         fx, fy = 18 + (k % 4) * 20, 26 + (k // 4) * 16
-        c.sprite(fx, fy, FOLDER, BLUE)
+        c.sprite(fx, fy, FOLDER, BYE)
         c.rect(fx, fy + 1, 3, 1, GLOW)
         c.rect(fx - 1, fy + 8, 11, 1, ALU)
 
@@ -596,12 +597,12 @@ def byeclicky(i, n):
         if not held:
             c.rrect(kx, 62, 11, 9, ALU2)
         c.rrect(kx, 61 + dy, 11, 8, ALU)
-        c.sprite(kx + 3, 62 + dy, sym, BLUE if held else INK)
+        c.sprite(kx + 3, 62 + dy, sym, BYE if held else INK)
     if 0.55 <= t < 2.4:
         for k in range(5):
             bh = 1 + round(3 + 3 * math.sin(t * 11 + k * 1.3) * math.sin(t * 3 + k))
             bh = max(1, min(7, bh))
-            c.rect(29 + k * 2, 66 - bh // 2, 1, bh, BLUE)
+            c.rect(29 + k * 2, 66 - bh // 2, 1, bh, BYE)
     question = "WHERE'S SHARE?"
     if 0.7 <= t < 5.4:
         shown = question[:int(clamp((t - 0.7) / 1.4) * len(question) + 0.999)]
@@ -627,9 +628,9 @@ def byeclicky(i, n):
     click_ring(c, tx, ty, ph(t, 3.5, 3.9), 6)
     cursor(c, tx, ty, big=True)
     if 3.8 <= t < 5.4:
-        c.rrect(56, 24, 50, 9, BLUE)
-        c.rect(87, 23, 3, 1, BLUE)
-        c.set(88, 22, BLUE)
+        c.rrect(56, 24, 50, 9, BYE)
+        c.rect(87, 23, 3, 1, BYE)
+        c.set(88, 22, BYE)
         msg = "RIGHT HERE!"
         c.text(59, 26, msg[:int(clamp((t - 3.8) / 0.5) * len(msg) + 0.999)], WHITE)
     return c
