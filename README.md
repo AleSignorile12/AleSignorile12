@@ -12,7 +12,7 @@ I'm **Alessandro**, a student at the Apple Developer Academy. I make Mac and iPh
 
 # 🛠 What I'm building
 
-### <img src="assets/byeclicky.png" width="30"> ByeClicky
+### <img src="assets/byeclicky.png" width="30" align="absmiddle"> ByeClicky
 
 A little assistant that sits next to your cursor. You hold Control + Option, ask it something, and
 it looks at your screen and points at the right button. It runs locally with Ollama, so nothing
@@ -22,7 +22,7 @@ leaves your Mac.
 
 ![ByeClicky: you ask where Share is, and the blue cursor flies to the Share button](art/byeclicky.gif)
 
-### <img src="assets/senso.png" width="30"> Senso
+### <img src="assets/senso.png" width="30" align="absmiddle"> Senso
 
 An iPhone and Apple Watch app that helps blind and low-vision people pour a drink without
 overflowing the cup. It listens to the pour with an on-device sound model, says how full the glass
@@ -32,7 +32,7 @@ is as you go, and tells you when to stop.
 
 ![Senso: water pours into a glass, the phone fills up and calls out 25, 50, 75 percent, then says STOP](art/senso.gif)
 
-### <img src="assets/dynisland.png" width="30"> Dynisland
+### <img src="assets/dynisland.png" width="30" align="absmiddle"> Dynisland
 
 A Dynamic Island for the MacBook notch: what's playing, a shelf for files, timers, that kind of
 thing. Still working on it.
@@ -41,7 +41,7 @@ thing. Still working on it.
 
 ![Dynisland: the notch opens for music, catches a dropped file and runs a timer](art/dynisland.gif)
 
-### <img src="assets/tracker.png" width="30"> Tracker
+### <img src="assets/tracker.png" width="30" align="absmiddle"> Tracker
 
 An iPhone app for coaching kids: the team list, who's paid this month, which documents are still
 missing, birthdays, and an offline translator for talking with kids who speak another language.
