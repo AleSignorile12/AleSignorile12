@@ -40,10 +40,13 @@ PALETTE = [
     "#3A0A5E",  # CAPJO    CapJo's deep purple
     "#D5C9F0",  # LAV      CapJo's lavender
     "#E8433A",  # XRED     X-Snow's red
+    "#059E5C",  # EMERALD  AquaSave's brand green
+    "#33D685",  # MINT     AquaSave, lighter water
+    "#E3F6EC",  # MINTBG   AquaSave, empty part of the drop
 ]
 (INK, WALL, WALL2, FRAME, SKY, GLOW, WHITE, BLUE,
  ALU, ALU2, BLACK, AMBER, WOOD, WOOD2, PINK, GREEN,
- SENSO, SKYC, MIST, BYE, CAPJO, LAV, XRED) = range(23)
+ SENSO, SKYC, MIST, BYE, CAPJO, LAV, XRED, EMERALD, MINT, MINTBG) = range(26)
 
 BAYER = [[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]]
 
@@ -1192,6 +1195,110 @@ def xsnow(i, n):
     return c
 
 
+# ---------------------------------------------------------------- AquaSave --
+COIN = [".###.", "##..#", "#.###", "##..#", ".###."]
+
+
+def aqua_tabs(s, active):
+    s.rect(0, 83, SW, 1, ALU)
+    icons = [["..#..", ".###.", "#####", "#####", ".###."], ["....#", "..#.#", "#.#.#", "#.#.#", "#####"],
+             ["#####", "#.#.#", "#####", "#.#.#", "#####"], [".###.", "#...#", "#.#.#", "#...#", ".###."]]
+    for k, icon in enumerate(icons):
+        s.sprite(5 + k * 12, 86, icon, EMERALD if k == active else ALU2)
+
+
+def aqua_today(t):
+    s = Canvas(SW, SH, WHITE)
+    s.text(3, 1, "9:41", INK)
+    s.rrect(19, 1, 12, 4, BLACK)
+    s.text(3, 10, "TODAY", INK, scale=2)
+    used = 0.22 + (0.2 if t >= 0.9 else 0) + (0.06 if t >= 2.1 else 0)
+    if t < 0.9:
+        shown = used
+    else:
+        shown = used - (0.2 * (1 - ease_io(ph(t, 0.9, 1.5))) if t < 2.1 else 0) - (0.06 * (1 - ease_io(ph(t, 2.1, 2.5))) if t >= 2.1 else 0)
+    level = 1 - shown
+    cx, top, cy, r = 25, 21, 41, 12
+    lvl_y = cy + r - level * (cy + r - top)
+    for y in range(top, cy + r + 1):
+        if y < cy:
+            w = r * ((y - top) / (cy - top)) ** 0.75
+        else:
+            w = math.sqrt(max(0, r * r - (y - cy) ** 2))
+        for x in range(round(cx - w), round(cx + w) + 1):
+            edge = abs(x - cx) >= w - 1 or y == cy + r
+            wave = 0.9 * math.sin(x * 0.7 + t * 5)
+            water = y >= lvl_y + wave
+            s.set(x, y, EMERALD if edge else (MINT if water and y < lvl_y + wave + 2 else EMERALD if water else MINTBG))
+    left = round(150 * level)
+    s.text((SW - text_w(f"{left} L LEFT")) // 2, 57, f"{left} L LEFT", INK)
+    label = "SHOWER" if 0.9 <= t < 1.8 else "SINK" if 2.1 <= t < 3.0 else "ON TRACK"
+    if label == "ON TRACK":
+        s.text((SW - text_w(label)) // 2, 64, label, EMERALD)
+    else:
+        s.rrect((SW - text_w(label)) // 2 - 2, 63, text_w(label) + 3, 7, EMERALD)
+        s.text((SW - text_w(label)) // 2, 64, label, WHITE)
+    s.rrect(3, 71, 44, 10, MINTBG)
+    s.text(5, 74, "TONIGHT", ALU2)
+    s.sprite(32, 73, COIN, AMBER)
+    s.text(38, 74, "12", INK)
+    aqua_tabs(s, 0)
+    return s
+
+
+def aqua_rewards(t):
+    s = Canvas(SW, SH, WHITE)
+    s.text(3, 1, "9:41", INK)
+    s.rrect(19, 1, 12, 4, BLACK)
+    s.text(3, 10, "REWARDS", INK)
+    s.rrect(3, 18, 44, 22, EMERALD)
+    bal = 1240 + round(12 * ease_out(ph(t, 4.4, 5.0)))
+    flip = 4.4 <= t < 4.6
+    s.sprite(6, 22, [".#.", "###", ".#."] if flip else COIN, AMBER)
+    s.text(13, 23, str(bal), WHITE, scale=1)
+    s.text(6, 31, "RIVER", MINTBG)
+    s.rect(28, 33, 16, 2, MINT)
+    s.rect(28, 33, 11 + (1 if t >= 4.6 else 0), 2, WHITE)
+    if 4.6 <= t < 5.4:
+        for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1), (2, 0), (-2, 0), (0, 2), (0, -2)):
+            s.set(44 + dx, 21 + dy, AMBER)
+    for k, (name, cost, col) in enumerate((("SPOTIFY", "1000", GREEN), ("GIFT 10€", "1000", AMBER), ("SENSOR", "300", BLUE))):
+        y = 45 + k * 12
+        s.rrect(3, y, 44, 10, MINTBG)
+        s.rect(5, y + 2, 6, 6, col)
+        s.text(13, y + 3, name, INK)
+    aqua_tabs(s, 2)
+    return s
+
+
+def aquasave(i, n):
+    T = 7.2
+    t = i / n * T
+    c = Canvas(120, 100)
+    for y in range(100):
+        for x in range(120):
+            c.set(x, y, gradient(y + 6 * math.sin(x * 0.05), x, y, [(10, FRAME), (60, WALL2), (100, WALL)]))
+    c.rrect(32, 1, 56, 98, ALU2, r=4)
+    c.rrect(33, 2, 54, 96, BLACK, r=4)
+    clip = (35, 4, 35 + SW, 4 + SH)
+    if t < 3.6:
+        c.blit(aqua_today(t), 35, 4, clip)
+    elif t < 3.95:
+        off = round(SW * ease_io(ph(t, 3.6, 3.95)))
+        c.blit(aqua_today(t), 35 - off, 4, clip)
+        c.blit(aqua_rewards(t), 35 + SW - off, 4, clip)
+    elif t < 6.85:
+        c.blit(aqua_rewards(t), 35, 4, clip)
+    else:
+        off = round(SW * ease_io(ph(t, 6.85, 7.2)))
+        c.blit(aqua_rewards(t), 35 + off, 4, clip)
+        c.blit(aqua_today(0), 35 - SW + off, 4, clip)
+    for (x, y) in [(35, 4), (36, 4), (35, 5), (84, 4), (83, 4), (84, 5),
+                   (35, 95), (36, 95), (35, 94), (84, 95), (83, 95), (84, 94)]:
+        c.set(x, y, BLACK)
+    return c
+
+
 # -------------------------------------------------------------------- main --
 def render(name, fn, n, scale, delay_cs=8):
     frames = [fn(i, n) for i in range(n)]
@@ -1207,3 +1314,4 @@ if __name__ == "__main__":
     render("senso", senso, 90, 5)
     render("capjo", capjo, 90, 4)
     render("xsnow", xsnow, 80, 5)
+    render("aquasave", aquasave, 90, 4)

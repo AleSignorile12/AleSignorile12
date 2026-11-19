@@ -71,6 +71,16 @@ the Apple Developer Academy.
 
 ![CapJo: the challenge is a tree near you, the camera snaps it, and the photo lands in the journal](art/capjo.gif)
 
+### <img src="assets/aquasave.png" width="30" align="absmiddle"> AquaSave
+
+An iPhone app for a family of small water sensors that clip onto taps and shower heads. It learns
+your home's usual day, sets a daily limit that slowly steps down, and pays credits for every liter
+you save. The sensors don't exist yet, so for now it runs on simulated readings.
+
+*SwiftUI · SwiftData · Swift Charts · WidgetKit*
+
+![AquaSave: the water drop drains as a shower and a sink are used, then the credits go up in Rewards](art/aquasave.gif)
+
 ---
 
 # 💻 Tech stack
