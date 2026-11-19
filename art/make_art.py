@@ -37,10 +37,13 @@ PALETTE = [
     "#C9E7F6",  # SKYC     Senso
     "#D9F1FD",  # MIST     Senso
     "#3380FF",  # BYE      ByeClicky's cursor, same blue as the app
+    "#3A0A5E",  # CAPJO    CapJo's deep purple
+    "#D5C9F0",  # LAV      CapJo's lavender
+    "#E8433A",  # XRED     X-Snow's red
 ]
 (INK, WALL, WALL2, FRAME, SKY, GLOW, WHITE, BLUE,
  ALU, ALU2, BLACK, AMBER, WOOD, WOOD2, PINK, GREEN,
- SENSO, SKYC, MIST, BYE) = range(20)
+ SENSO, SKYC, MIST, BYE, CAPJO, LAV, XRED) = range(23)
 
 BAYER = [[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]]
 
@@ -473,6 +476,12 @@ def desk(i, n):
         c.set(x, 28, col)
     for (x, y, w) in ((65, 33, 24), (65, 36, 18), (65, 39, 28), (65, 42, 14)):
         c.rect(x, y, w, 1, ALU)
+    # X-Snow: snow settles on the window's top edge, then melts away before the loop restarts
+    settle = ease_io(ph(t, 0.3, 3.0)) - ease_io(ph(t, 4.6, 5.05))
+    for x in range(62, 104):
+        hgt = round(settle * (1.4 + 0.7 * math.sin(x * 0.9) + 0.4 * math.sin(x * 0.37)))
+        if hgt > 0:
+            c.rect(x, 27 - hgt, 1, hgt, WHITE)
     hover = 1.4 <= t < 3.6
     pressed = 1.4 <= t < 1.55
     c.rect(89, 48, 12, 4, FRAME if pressed else BYE if hover else ALU)
@@ -503,6 +512,14 @@ def desk(i, n):
         for d in range(dots):
             c.set(100 + d * 3, 42, WHITE)
 
+    rnd = random.Random(21)
+    for k in range(16):
+        fx0, fy0, m = rnd.uniform(53, 115), rnd.uniform(0, 40), rnd.choice((1, 2))
+        fy = 22 + (fy0 + m * 40 * t / T) % 40
+        fx = fx0 + math.sin(2 * math.pi * (t / T + rnd.random()))
+        if 53 <= fx < 115:
+            c.set(fx, fy, GLOW)
+
     # Dynisland in the notch: music, then a timer
     w, h, mode = 8, 3, None
     if 0.8 <= t < 2.65:
@@ -525,22 +542,48 @@ def desk(i, n):
         left = max(1, 5 - int((t - 3.2) / 0.25))
         c.text(x0 + 8, 20, f"0:0{left}", WHITE)
 
-    # Tracker on the phone: kids get ticked off, then a birthday
+    # the phone: Tracker ticks off the kids and pops a birthday, then CapJo takes the day's photo
     c.rect(127, 64, 13, 4, ALU2)
     c.rect(125, 34, 15, 31, ALU2)
     c.rect(126, 35, 13, 29, BLACK)
-    c.rect(127, 36, 11, 27, WHITE)
-    c.rect(131, 37, 3, 1, BLACK)
-    c.rect(127, 39, 11, 3, BLUE)
-    c.rect(129, 40, 4, 1, WHITE)
-    checked = sum(t >= s for s in (0.5, 1.0, 1.5, 2.0)) - sum(t >= s for s in (4.6, 4.7, 4.8, 4.9))
-    for k, ry in enumerate((44, 49, 54, 59)):
-        if k < checked:
-            c.rect(128, ry, 3, 3, GREEN)
-        else:
-            c.box(128, ry, 3, 3, ALU)
-        c.rect(132, ry + 1, 5 - (k % 2), 1, ALU)
-    confetti(c, t, 2.3, 132, 36)
+    if t < 2.95 or t >= 4.95:
+        c.rect(127, 36, 11, 27, WHITE)
+        c.rect(131, 37, 3, 1, BLACK)
+        c.rect(127, 39, 11, 3, BLUE)
+        c.rect(129, 40, 4, 1, WHITE)
+        checked = sum(t >= s for s in (0.5, 1.0, 1.5, 2.0)) if t < 2.95 else 0
+        for k, ry in enumerate((44, 49, 54, 59)):
+            if k < checked:
+                c.rect(128, ry, 3, 3, GREEN)
+            else:
+                c.box(128, ry, 3, 3, ALU)
+            c.rect(132, ry + 1, 5 - (k % 2), 1, ALU)
+        if t < 2.95:
+            confetti(c, t, 2.3, 132, 36)
+    else:
+        flash = 3.55 <= t < 3.65
+        c.rect(127, 36, 11, 27, WHITE if flash else LAV)
+        c.rect(131, 37, 3, 1, BLACK)
+        if not flash:
+            c.rect(129, 40, 7, 1, CAPJO)
+            c.rect(128, 43, 9, 9, WHITE)
+            if t < 3.65:
+                c.rect(130, 46, 5, 1, ALU)
+                c.rect(131, 48, 3, 1, ALU)
+            else:
+                c.rect(129, 44, 7, 5, GLOW)
+                c.rect(129, 48, 7, 1, GREEN)
+                c.rect(132, 46, 1, 2, WOOD)
+                c.rect(131, 45, 3, 1, GREEN)
+                c.set(135, 44, AMBER)
+            pressed = 3.45 <= t < 3.55
+            c.rect(129, 55, 7, 3, INK if pressed else CAPJO)
+            c.set(132, 56, WHITE)
+            c.set(133, 56, WHITE)
+            if t >= 3.8:
+                c.set(128, 60, AMBER)
+                c.set(129, 60, PINK)
+                c.rect(131, 60, 1, 1, CAPJO)
 
     # Senso on the watch: Senso's blue liquid rises to the stop line, then resets
     c.rect(147, 53, 5, 3, ALU2)
@@ -919,6 +962,236 @@ def senso(i, n):
         c.text(48, 16, msg, fg)
     return c
 
+# ------------------------------------------------------------------- CapJo --
+FLAME = [".#.", "##.", "###", "###", ".#."]
+
+
+def capjo_status(s):
+    s.text(3, 1, "9:41", INK)
+    s.rrect(19, 1, 12, 4, BLACK)
+
+
+def tree_photo(s, x, y, w, h):
+    for yy in range(h):
+        s.rect(x, y + yy, w, 1, GLOW if yy < h * 0.7 else GREEN)
+    s.disc(x + w - 3, y + 2, 1, AMBER)
+    tx = x + w // 2 - 1
+    s.rect(tx, y + h // 2, 2, h - h // 2, WOOD)
+    s.disc(tx + 1, y + h // 2 - 1, max(2, h // 4), GREEN)
+
+
+def capjo_challenge(t, streak):
+    s = Canvas(SW, SH, LAV)
+    capjo_status(s)
+    s.text((SW - text_w("CAPJO")) // 2, 10, "CAPJO", CAPJO)
+    s.text(3, 20, "TODAY:", CAPJO)
+    s.rrect(3, 27, 44, 32, WHITE)
+    s.text((SW - text_w("A TREE")) // 2, 32, "A TREE", INK)
+    s.text((SW - text_w("NEAR YOU")) // 2, 39, "NEAR YOU", INK)
+    pressed = 1.55 <= t < 1.7
+    s.rrect(15, 48, 20, 7, INK if pressed else CAPJO)
+    s.rect(22, 50, 6, 4, WHITE)
+    s.rect(24, 49, 2, 1, WHITE)
+    s.set(25, 51, CAPJO)
+    s.rrect(3, 63, 20, 15, WHITE)
+    s.sprite(6, 66, FLAME, AMBER)
+    s.text(12, 67, str(streak), INK)
+    s.rrect(27, 63, 20, 15, WHITE)
+    s.text(30, 67, str(streak), INK)
+    s.line(36, 71, 38, 67, INK)
+    s.text(40, 67, "3", INK)
+    return s
+
+
+def capjo_camera(t):
+    s = Canvas(SW, SH, BLACK)
+    s.text(3, 3, "CANCEL", WHITE)
+    tree_photo(s, 0, 12, SW, 56)
+    s.text(21, 72, "1X", AMBER)
+    snap = 3.2
+    r = 4 if snap <= t < snap + 0.12 else 5
+    s.disc(25, 84, r + 1, WHITE)
+    s.disc(25, 84, r, BLACK)
+    s.disc(25, 84, r - 1, WHITE)
+    if snap <= t < snap + 0.1:
+        s.rect(0, 0, SW, SH, WHITE)
+    return s
+
+
+def capjo_journal(t):
+    s = Canvas(SW, SH, LAV)
+    capjo_status(s)
+    s.text(3, 10, "JOURNAL", CAPJO)
+    s.text(3, 20, "TODAY", ALU2)
+    drop = springy(ph(t, 4.45, 4.85))
+    if drop > 0:
+        y = round(lerp(-30, 27, drop))
+        s.rect(3, y, 21, 27, WHITE)
+        tree_photo(s, 5, y + 2, 17, 15)
+        s.rect(5, y + 20, 12, 1, ALU)
+        s.rect(5, y + 23, 8, 1, ALU)
+        if t >= 5.7:
+            s.sprite(18, y + 20, ["#.#", "###", ".#."], PINK)
+    s.rect(26, 27, 21, 27, WHITE)
+    for yy in range(15):
+        s.rect(28, 29 + yy, 17, 1, (PINK, AMBER, AMBER, WALL2)[min(3, yy // 4)])
+    s.disc(36, 37, 2, AMBER)
+    s.rect(28, 47, 12, 1, ALU)
+    s.text(3, 59, "YESTERDAY", ALU2)
+    s.rect(3, 66, 21, 26, WHITE)
+    for yy in range(15):
+        s.rect(5, 68 + yy, 17, 1, SKY if yy < 9 else WALL2)
+    s.disc(13, 74, 3, WHITE)
+    return s
+
+
+def capjo(i, n):
+    T = 7.2
+    t = i / n * T
+    c = Canvas(120, 100)
+    for y in range(100):
+        for x in range(120):
+            c.set(x, y, gradient(y + 6 * math.sin(x * 0.05), x, y, [(10, FRAME), (60, WALL2), (100, WALL)]))
+    c.rrect(32, 1, 56, 98, ALU2, r=4)
+    c.rrect(33, 2, 54, 96, BLACK, r=4)
+    clip = (35, 4, 35 + SW, 4 + SH)
+    streak = 1 if 4.0 <= t < 7.2 else 0
+    screens = [(0.0, lambda: capjo_challenge(t, 0)), (2.0, lambda: capjo_camera(t)),
+               (4.0, lambda: capjo_journal(t)), (6.85, lambda: capjo_challenge(t, 1))]
+    cur = max(k for k, (start, _) in enumerate(screens) if t >= start)
+    if cur + 1 < len(screens) and t >= screens[cur + 1][0] - 0.0001:
+        cur += 1
+    start, make = screens[cur]
+    slide = 0.35
+    if cur > 0 and t < start + slide:
+        off = round(SW * ease_io(ph(t, start, start + slide)))
+        c.blit(screens[cur - 1][1](), 35 - off, 4, clip)
+        c.blit(make(), 35 + SW - off, 4, clip)
+    else:
+        c.blit(make(), 35, 4, clip)
+    for (x, y) in [(35, 4), (36, 4), (35, 5), (84, 4), (83, 4), (84, 5),
+                   (35, 95), (36, 95), (35, 94), (84, 95), (83, 95), (84, 94)]:
+        c.set(x, y, BLACK)
+    if 4.0 <= t < 6.85:
+        confetti(c, t, 4.85, 48, 30, n=16, seed=4, spread=16, lift=(12, 26), clip=clip)
+    return c
+
+
+# ------------------------------------------------------------------ X-Snow --
+FLAKE = [".#.", "###", ".#."]
+
+
+def xsnow(i, n):
+    T = 6.4
+    t = i / n * T
+    W_, H_ = 128, 56
+    c = Canvas(W_, H_)
+    for y in range(H_):
+        for x in range(W_):
+            v = y + 3 * math.sin(x * 0.09 + 1)
+            c.set(x, y, gradient(v, x, y, [(8, SKY), (26, FRAME), (50, WALL2)]))
+    c.rect(0, 0, W_, 7, WALL)
+    c.text(4, 1, "FINDER", WHITE)
+    c.sprite(100, 2, FLAKE, WHITE)
+    c.text(110, 1, "9:41", WHITE)
+
+    grow = ease_io(ph(t, 0.2, 4.4))
+    melt = ease_io(ph(t, 5.9, 6.35))
+    plow = ph(t, 4.7, 5.7)
+    plow_x = lerp(50, 116, plow) if 0 < plow < 1 else None
+
+    def window(x, y, w, h):
+        c.rect(x + 1, y + 1, w, h, INK)
+        c.rect(x, y, w, h, WHITE)
+        c.rect(x, y, w, 3, ALU)
+        for k, col in enumerate((PINK, AMBER, GREEN)):
+            c.set(x + 2 + k * 2, y + 1, col)
+        for k in range(3):
+            c.rect(x + 3, y + 6 + k * 4, w - 10 - k * 6, 1, ALU)
+
+    def pile(x0, x1, base, amount, cleared_before=None):
+        for x in range(x0, x1):
+            hgt = amount * (1.6 + 0.8 * math.sin(x * 0.8) + 0.5 * math.sin(x * 0.33))
+            if cleared_before is not None and x < cleared_before - 2:
+                hgt = 0
+            hgt = round(hgt)
+            if hgt > 0:
+                c.rect(x, base - hgt, 1, hgt, WHITE)
+
+    window(8, 18, 50, 24)
+    window(52, 24, 62, 22)
+    pile(8, 58, 18, grow * (1 - melt) * 1.2)
+    w2 = grow * 1.2 if plow_x is None and t < 4.7 else (0 if t >= 5.7 else grow * 1.2)
+    pile(52, 114, 24, w2, plow_x)
+    if plow_x is not None:
+        px = round(plow_x)
+        c.rect(px - 5, 20, 5, 3, AMBER)
+        c.rect(px - 4, 19, 2, 1, AMBER)
+        c.rect(px, 19, 1, 5, ALU)
+        c.set(px - 4, 23, INK)
+        c.set(px - 1, 23, INK)
+        c.rect(px + 1, 22, 2, 2, WHITE)
+
+    # the Dock, and snow along the bottom of the screen stopping at its ends
+    c.rrect(36, 49, 56, 7, ALU2)
+    for k, col in enumerate((BLUE, GREEN, AMBER, PINK, CAPJO, XRED, SENSO)):
+        c.rect(39 + k * 7, 51, 5, 4, col)
+    pile(0, 36, 56, grow * (1 - melt) * 1.6)
+    pile(92, W_, 56, grow * (1 - melt) * 1.6)
+
+    # a tree and a snowman standing on the drift
+    base = 56 - round(grow * (1 - melt) * 2)
+    for k, (yy, hw) in enumerate(((0, 1), (1, 1), (2, 2), (3, 2), (4, 3), (5, 3), (6, 4))):
+        c.rect(17 - hw, base - 9 + yy, 2 * hw + 1, 1, GREEN)
+    c.rect(16, base - 2, 3, 2, WOOD)
+    c.set(17, base - 10, AMBER)
+    if int(t * 4) % 2:
+        for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            c.set(17 + dx, base - 10 + dy, AMBER)
+    c.disc(110, base - 3, 2, WHITE)
+    c.disc(110, base - 7, 1.5, WHITE)
+    c.set(109, base - 8, INK)
+    c.set(111, base - 8, INK)
+    c.set(112, base - 7, AMBER)
+
+    # lights draped under the menu bar
+    for x in range(0, W_):
+        sag = 3 * abs(math.sin(math.pi * x / 42))
+        y = round(8 + sag)
+        c.set(x, y, INK)
+        if x % 6 == 3:
+            k = x // 6
+            on = (k + int(t * 3)) % 3 != 0
+            c.rect(x, y + 1, 1, 2, (PINK, AMBER, BLUE, GREEN)[k % 4] if on else WALL2)
+
+    # Santa
+    if 1.8 <= t < 3.6:
+        sx = round(lerp(140, -34, ph(t, 1.8, 3.6)))
+        sy = 13 + round(math.sin(t * 10))
+        for r in range(3):
+            rx = sx + r * 5
+            c.rect(rx, sy, 3, 2, WOOD)
+            c.set(rx, sy - 1, WOOD)
+            c.set(rx, sy + 2, WOOD)
+            c.set(rx + 2, sy + 2, WOOD)
+        c.set(sx - 1, sy, XRED)
+        c.line(sx + 14, sy + 1, sx + 17, sy + 1, ALU)
+        c.rect(sx + 17, sy, 6, 3, XRED)
+        c.rect(sx + 17, sy + 3, 7, 1, AMBER)
+        c.rect(sx + 19, sy - 2, 2, 2, XRED)
+        c.set(sx + 19, sy - 1, WHITE)
+
+    # falling snow, over everything
+    rnd = random.Random(8)
+    for k in range(44):
+        fx0, fy0, m = rnd.uniform(0, W_), rnd.uniform(0, H_ + 4), rnd.choice((1, 1, 2))
+        fy = 7 + (fy0 + m * (H_ + 4) * t / T) % (H_ + 4) - 2
+        fx = fx0 + 1.5 * math.sin(2 * math.pi * (t / T * rnd.choice((1, 2)) + rnd.random()))
+        if fy >= 7:
+            c.set(fx, fy, WHITE if k % 3 else GLOW)
+    return c
+
+
 # -------------------------------------------------------------------- main --
 def render(name, fn, n, scale, delay_cs=8):
     frames = [fn(i, n) for i in range(n)]
@@ -932,3 +1205,5 @@ if __name__ == "__main__":
     render("dynisland", dynisland, 80, 5)
     render("tracker", tracker, 90, 4)
     render("senso", senso, 90, 5)
+    render("capjo", capjo, 90, 4)
+    render("xsnow", xsnow, 80, 5)

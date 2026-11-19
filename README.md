@@ -1,8 +1,9 @@
-![Pixel art of a desk at night: ByeClicky's blue cursor on the Mac, Dynisland in the notch, Tracker on the phone and Senso on the watch](art/desk.gif)
+![Pixel art of a desk at night: ByeClicky's blue cursor and X-Snow's snow on the Mac, Dynisland in the notch, Tracker and CapJo on the phone and Senso on the watch](art/desk.gif)
 
 <sub>My desk at night, in pixels. ByeClicky is the blue cursor on the Mac, Dynisland lives in the
-notch, Tracker is on the phone and Senso is on the watch. Drawn from code with a small Python
-script, no libraries ([source](art/make_art.py)).</sub>
+notch, and it's snowing on the screen thanks to X-Snow. The phone switches between Tracker and
+CapJo, and Senso is on the watch. Drawn from code with a small Python script, no libraries
+([source](art/make_art.py)).</sub>
 
 ## Hey! 👋
 
@@ -41,6 +42,16 @@ thing. Still working on it.
 
 ![Dynisland: the notch opens for music, catches a dropped file and runs a timer](art/dynisland.gif)
 
+### <img src="assets/xsnow.png" width="30" align="absmiddle"> X-Snow
+
+A menu bar app that makes it snow on your Mac. The snow piles up on top of your windows and along
+the Dock, and you can put out trees and snowmen, hang lights, send a little plow along a window,
+and wait for Santa to fly by.
+
+*Swift · AppKit · SpriteKit*
+
+![X-Snow: snow falls on the desktop and piles up on the windows, Santa flies across, and a plow clears a window](art/xsnow.gif)
+
 ### <img src="assets/tracker.png" width="30" align="absmiddle"> Tracker
 
 An iPhone app for coaching kids: the team list, who's paid this month, which documents are still
@@ -50,8 +61,18 @@ missing, birthdays, and an offline translator for talking with kids who speak an
 
 ![Tracker: kids get marked as paid, a birthday pops confetti, then the translator turns HELLO into BOK](art/tracker.gif)
 
+### <img src="assets/capjo.png" width="30" align="absmiddle"> CapJo
+
+A photo journal with one small challenge a day, like "a tree near you". You take the picture in the
+app, add an emoji and a caption, and it lands in your journal as a polaroid. Made with my team at
+the Apple Developer Academy.
+
+*SwiftUI · AVFoundation · UserNotifications*
+
+![CapJo: the challenge is a tree near you, the camera snaps it, and the photo lands in the journal](art/capjo.gif)
+
 ---
 
 # 💻 Tech stack
 
-![Swift](https://img.shields.io/badge/Swift-F05138?style=for-the-badge&logo=swift&logoColor=white) ![SwiftUI](https://img.shields.io/badge/SwiftUI-0071E3?style=for-the-badge&logo=swift&logoColor=white) ![AppKit](https://img.shields.io/badge/AppKit-2C2C2E?style=for-the-badge) ![SwiftData](https://img.shields.io/badge/SwiftData-0A84FF?style=for-the-badge) ![Core ML](https://img.shields.io/badge/Core%20ML-009EF8?style=for-the-badge) ![watchOS](https://img.shields.io/badge/watchOS-1C1C1E?style=for-the-badge) ![AVFoundation](https://img.shields.io/badge/AVFoundation-3A3A3C?style=for-the-badge) ![ScreenCaptureKit](https://img.shields.io/badge/ScreenCaptureKit-1C1C1E?style=for-the-badge) ![Xcode](https://img.shields.io/badge/Xcode-147EFB?style=for-the-badge&logo=xcode&logoColor=white) ![Ollama](https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white) ![CocoaPods](https://img.shields.io/badge/CocoaPods-EE3322?style=for-the-badge&logo=cocoapods&logoColor=white)
+![Swift](https://img.shields.io/badge/Swift-F05138?style=for-the-badge&logo=swift&logoColor=white) ![SwiftUI](https://img.shields.io/badge/SwiftUI-0071E3?style=for-the-badge&logo=swift&logoColor=white) ![AppKit](https://img.shields.io/badge/AppKit-2C2C2E?style=for-the-badge) ![SwiftData](https://img.shields.io/badge/SwiftData-0A84FF?style=for-the-badge) ![Core ML](https://img.shields.io/badge/Core%20ML-009EF8?style=for-the-badge) ![watchOS](https://img.shields.io/badge/watchOS-1C1C1E?style=for-the-badge) ![AVFoundation](https://img.shields.io/badge/AVFoundation-3A3A3C?style=for-the-badge) ![ScreenCaptureKit](https://img.shields.io/badge/ScreenCaptureKit-1C1C1E?style=for-the-badge) ![SpriteKit](https://img.shields.io/badge/SpriteKit-2C2C2E?style=for-the-badge) ![Xcode](https://img.shields.io/badge/Xcode-147EFB?style=for-the-badge&logo=xcode&logoColor=white) ![Ollama](https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white) ![CocoaPods](https://img.shields.io/badge/CocoaPods-EE3322?style=for-the-badge&logo=cocoapods&logoColor=white)
