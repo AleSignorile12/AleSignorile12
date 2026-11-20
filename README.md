@@ -23,7 +23,7 @@ leaves your Mac.
 
 ![ByeClicky: you ask where Share is, and the blue cursor flies to the Share button](art/byeclicky.gif)
 
-### <img src="assets/senso.png" width="30" align="absmiddle"> Senso
+### <img src="assets/senso.png" width="30" align="absmiddle"> [Senso](https://github.com/AleSignorile12/Senso)
 
 An iPhone and Apple Watch app that helps blind and low-vision people pour a drink without
 overflowing the cup. It listens to the pour with an on-device sound model, says how full the glass
@@ -71,7 +71,7 @@ the Apple Developer Academy.
 
 ![CapJo: the challenge is a tree near you, the camera snaps it, and the photo lands in the journal](art/capjo.gif)
 
-### <img src="assets/aquasave.png" width="30" align="absmiddle"> AquaSave
+### <img src="assets/aquasave.png" width="30" align="absmiddle"> [AquaSave](https://github.com/AleSignorile12/AquaSave-V2.0)
 
 An iPhone app for a family of small water sensors that clip onto taps and shower heads. It learns
 your home's usual day, sets a daily limit that slowly steps down, and pays credits for every liter
