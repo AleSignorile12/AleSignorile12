@@ -13,7 +13,7 @@ I'm **Alessandro**, a student at the Apple Developer Academy. I make Mac and iPh
 
 # 🛠 What I'm building
 
-### <img src="assets/byeclicky.png" width="30" align="absmiddle"> ByeClicky
+### <img src="assets/byeclicky.png" width="30" align="absmiddle"> [ByeClicky](https://github.com/AleSignorile12/ByeClicky)
 
 A little assistant that sits next to your cursor. You hold Control + Option, ask it something, and
 it looks at your screen and points at the right button. It runs locally with Ollama, so nothing
@@ -33,7 +33,7 @@ is as you go, and tells you when to stop.
 
 ![Senso: water pours into a glass, the phone fills up and calls out 25, 50, 75 percent, then says STOP](art/senso.gif)
 
-### <img src="assets/dynisland.png" width="30" align="absmiddle"> Dynisland
+### <img src="assets/dynisland.png" width="30" align="absmiddle"> [Dynisland](https://github.com/AleSignorile12/Dynisland)
 
 A Dynamic Island for the MacBook notch: what's playing, a shelf for files, timers, that kind of
 thing. Still working on it.
@@ -42,7 +42,7 @@ thing. Still working on it.
 
 ![Dynisland: the notch opens for music, catches a dropped file and runs a timer](art/dynisland.gif)
 
-### <img src="assets/xsnow.png" width="30" align="absmiddle"> X-Snow
+### <img src="assets/xsnow.png" width="30" align="absmiddle"> [X-Snow](https://github.com/AleSignorile12/X-Snow)
 
 A menu bar app that makes it snow on your Mac. The snow piles up on top of your windows and along
 the Dock, and you can put out trees and snowmen, hang lights, send a little plow along a window,
@@ -52,7 +52,7 @@ and wait for Santa to fly by.
 
 ![X-Snow: snow falls on the desktop and piles up on the windows, Santa flies across, and a plow clears a window](art/xsnow.gif)
 
-### <img src="assets/tracker.png" width="30" align="absmiddle"> Tracker
+### <img src="assets/tracker.png" width="30" align="absmiddle"> [Tracker](https://github.com/AleSignorile12/Tracker)
 
 An iPhone app for coaching kids: the team list, who's paid this month, which documents are still
 missing, birthdays, and an offline translator for talking with kids who speak another language.
@@ -61,7 +61,7 @@ missing, birthdays, and an offline translator for talking with kids who speak an
 
 ![Tracker: kids get marked as paid, a birthday pops confetti, then the translator turns HELLO into BOK](art/tracker.gif)
 
-### <img src="assets/capjo.png" width="30" align="absmiddle"> CapJo
+### <img src="assets/capjo.png" width="30" align="absmiddle"> [CapJo](https://github.com/AleSignorile12/CapJo)
 
 A photo journal with one small challenge a day, like "a tree near you". You take the picture in the
 app, add an emoji and a caption, and it lands in your journal as a polaroid. Made with my team at
