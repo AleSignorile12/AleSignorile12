@@ -8,6 +8,16 @@ I'm **Alessandro**, currently a student at the Apple Developer Academy and enrol
 
 # 🛠 What I'm building
 
+### <img src="assets/aquasave.png" width="30" align="absmiddle"> [AquaSave](https://github.com/AleSignorile12/AquaSave-V2.0)
+
+An iPhone app for a family of small water sensors that clip onto taps and shower heads. It learns
+your home's usual day, sets a daily limit that slowly steps down, and pays credits for every liter
+you save. The sensors don't exist yet, so for now it runs on simulated readings.
+
+*SwiftUI · SwiftData · Swift Charts · WidgetKit*
+
+![AquaSave: the water drop drains as a shower and a sink are used, then the credits go up in Rewards](art/aquasave.gif)
+
 ### <img src="assets/byeclicky.png" width="30" align="absmiddle"> [ByeClicky](https://github.com/AleSignorile12/ByeClicky)
 
 A little assistant that sits next to your cursor. You hold Control + Option, ask it something, and
@@ -65,16 +75,6 @@ the Apple Developer Academy.
 *SwiftUI · AVFoundation · UserNotifications*
 
 ![CapJo: the challenge is a tree near you, the camera snaps it, and the photo lands in the journal](art/capjo.gif)
-
-### <img src="assets/aquasave.png" width="30" align="absmiddle"> [AquaSave](https://github.com/AleSignorile12/AquaSave-V2.0)
-
-An iPhone app for a family of small water sensors that clip onto taps and shower heads. It learns
-your home's usual day, sets a daily limit that slowly steps down, and pays credits for every liter
-you save. The sensors don't exist yet, so for now it runs on simulated readings.
-
-*SwiftUI · SwiftData · Swift Charts · WidgetKit*
-
-![AquaSave: the water drop drains as a shower and a sink are used, then the credits go up in Rewards](art/aquasave.gif)
 
 ---
 
