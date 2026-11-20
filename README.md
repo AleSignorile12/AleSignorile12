@@ -2,7 +2,7 @@
 
 ## Hey! 👋
 
-I'm **Alessandro**, a student at the Apple Developer Academy. I make Mac and iPhone apps in Swift.
+I'm **Alessandro**, currently a student at the Apple Developer Academy and enrolled at Federico II University in Naples to study Computer Engineering. I like making Mac and iPhone apps in Swift.
 
 ---
 
