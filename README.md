@@ -1,10 +1,5 @@
 ![Pixel art of a desk at night: ByeClicky's blue cursor and X-Snow's snow on the Mac, Dynisland in the notch, Tracker and CapJo on the phone and Senso on the watch](art/desk.gif)
 
-<sub>My desk at night, in pixels. ByeClicky is the blue cursor on the Mac, Dynisland lives in the
-notch, and it's snowing on the screen thanks to X-Snow. The phone switches between Tracker and
-CapJo, and Senso is on the watch. Drawn from code with a small Python script, no libraries
-([source](art/make_art.py)).</sub>
-
 ## Hey! 👋
 
 I'm **Alessandro**, a student at the Apple Developer Academy. I make Mac and iPhone apps in Swift.
