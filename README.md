@@ -1,4 +1,4 @@
-![Pixel art of a desk at night: ByeClicky's blue cursor and X-Snow's snow on the Mac, Dynisland in the notch, Tracker and CapJo on the phone and Senso on the watch](art/desk.gif)
+![Pixel art of a desk at night: ByeClicky's blue cursor and X-Snow's snow on the Mac, Dynisland in the notch, Tracker and CapJo on the phone and Sensow on the watch](art/desk.gif)
 
 ## Hey! 👋
 
@@ -28,7 +28,7 @@ leaves your Mac.
 
 ![ByeClicky: you ask where Share is, and the blue cursor flies to the Share button](art/byeclicky.gif)
 
-### <img src="assets/senso.png" width="30" align="absmiddle"> [Senso](https://github.com/AleSignorile12/Senso)
+### <img src="assets/senso.png" width="30" align="absmiddle"> [Sensow](https://github.com/AleSignorile12/Sensow)
 
 An iPhone and Apple Watch app that helps blind and low-vision people pour a drink without
 overflowing the cup. It listens to the pour with an on-device sound model, says how full the glass
@@ -36,7 +36,7 @@ is as you go, and tells you when to stop.
 
 *SwiftUI · Core ML · AVFoundation · App Intents · watchOS*
 
-![Senso: water pours into a glass, the phone fills up and calls out 25, 50, 75 percent, then says STOP](art/senso.gif)
+![Sensow: water pours into a glass, the phone fills up and calls out 25, 50, 75 percent, then says STOP](art/senso.gif)
 
 ### <img src="assets/dynisland.png" width="30" align="absmiddle"> [Dynisland](https://github.com/AleSignorile12/Dynisland)
 
