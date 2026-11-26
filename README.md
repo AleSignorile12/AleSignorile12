@@ -60,9 +60,12 @@ and wait for Santa to fly by.
 ### <img src="assets/tracker.png" width="30" align="absmiddle"> [Tracker](https://github.com/AleSignorile12/Tracker)
 
 An iPhone app for coaching kids: the team list, who's paid this month, which documents are still
-missing, birthdays, and an offline translator for talking with kids who speak another language.
+missing, birthdays, the practice calendar, and an offline translator for talking with kids who speak
+another language. It syncs through iCloud, can lock with Face ID, makes monthly and season reports
+as PDFs in English or Italian, and has widgets for birthdays, payments and the next practice. On
+TestFlight now.
 
-*SwiftUI · SwiftData · on-device translation with ML Kit*
+*SwiftUI · SwiftData + CloudKit · WidgetKit · on-device translation with ML Kit*
 
 ![Tracker: kids get marked as paid, a birthday pops confetti, then the translator turns HELLO into BOK](art/tracker.gif)
 
@@ -80,4 +83,4 @@ the Apple Developer Academy.
 
 # 💻 Tech stack
 
-![Swift](https://img.shields.io/badge/Swift-F05138?style=for-the-badge&logo=swift&logoColor=white) ![SwiftUI](https://img.shields.io/badge/SwiftUI-0071E3?style=for-the-badge&logo=swift&logoColor=white) ![AppKit](https://img.shields.io/badge/AppKit-2C2C2E?style=for-the-badge) ![SwiftData](https://img.shields.io/badge/SwiftData-0A84FF?style=for-the-badge) ![Core ML](https://img.shields.io/badge/Core%20ML-009EF8?style=for-the-badge) ![watchOS](https://img.shields.io/badge/watchOS-1C1C1E?style=for-the-badge) ![AVFoundation](https://img.shields.io/badge/AVFoundation-3A3A3C?style=for-the-badge) ![ScreenCaptureKit](https://img.shields.io/badge/ScreenCaptureKit-1C1C1E?style=for-the-badge) ![SpriteKit](https://img.shields.io/badge/SpriteKit-2C2C2E?style=for-the-badge) ![Xcode](https://img.shields.io/badge/Xcode-147EFB?style=for-the-badge&logo=xcode&logoColor=white) ![Ollama](https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white) ![CocoaPods](https://img.shields.io/badge/CocoaPods-EE3322?style=for-the-badge&logo=cocoapods&logoColor=white)
+![Swift](https://img.shields.io/badge/Swift-F05138?style=for-the-badge&logo=swift&logoColor=white) ![SwiftUI](https://img.shields.io/badge/SwiftUI-0071E3?style=for-the-badge&logo=swift&logoColor=white) ![AppKit](https://img.shields.io/badge/AppKit-2C2C2E?style=for-the-badge) ![SwiftData](https://img.shields.io/badge/SwiftData-0A84FF?style=for-the-badge) ![CloudKit](https://img.shields.io/badge/CloudKit-3693F3?style=for-the-badge) ![WidgetKit](https://img.shields.io/badge/WidgetKit-1C1C1E?style=for-the-badge) ![Core ML](https://img.shields.io/badge/Core%20ML-009EF8?style=for-the-badge) ![watchOS](https://img.shields.io/badge/watchOS-1C1C1E?style=for-the-badge) ![AVFoundation](https://img.shields.io/badge/AVFoundation-3A3A3C?style=for-the-badge) ![ScreenCaptureKit](https://img.shields.io/badge/ScreenCaptureKit-1C1C1E?style=for-the-badge) ![SpriteKit](https://img.shields.io/badge/SpriteKit-2C2C2E?style=for-the-badge) ![Xcode](https://img.shields.io/badge/Xcode-147EFB?style=for-the-badge&logo=xcode&logoColor=white) ![Ollama](https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white) ![CocoaPods](https://img.shields.io/badge/CocoaPods-EE3322?style=for-the-badge&logo=cocoapods&logoColor=white)
