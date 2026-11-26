@@ -63,7 +63,7 @@ An iPhone app for coaching kids: the team list, who's paid this month, which doc
 missing, birthdays, the practice calendar, and an offline translator for talking with kids who speak
 another language. It syncs through iCloud, can lock with Face ID, makes monthly and season reports
 as PDFs in English or Italian, and has widgets for birthdays, payments and the next practice. On
-TestFlight now.
+TestFlight now as CoachBoard.
 
 *SwiftUI · SwiftData + CloudKit · WidgetKit · on-device translation with ML Kit*
 
