@@ -1,4 +1,4 @@
-![Pixel art of a desk at night: ByeClicky's blue cursor and X-Snow's snow on the Mac, Dynisland in the notch, Tracker and CapJo on the phone and Sensow on the watch](art/desk.gif)
+![Pixel art of a desk at night: ByeClicky's blue cursor and X-Snow's snow on the Mac, Dynisland in the notch, CoachBoard and CapJo on the phone and Sensow on the watch](art/desk.gif)
 
 ## Hey! 👋
 
@@ -57,17 +57,17 @@ and wait for Santa to fly by.
 
 ![X-Snow: snow falls on the desktop and piles up on the windows, Santa flies across, and a plow clears a window](art/xsnow.gif)
 
-### <img src="assets/tracker.png" width="30" align="absmiddle"> [Tracker](https://github.com/AleSignorile12/Tracker)
+### <img src="assets/tracker.png" width="30" align="absmiddle"> [CoachBoard](https://github.com/AleSignorile12/CoachBoard)
 
 An iPhone app for coaching kids: the team list, who's paid this month, which documents are still
 missing, birthdays, the practice calendar, and an offline translator for talking with kids who speak
 another language. It syncs through iCloud, can lock with Face ID, makes monthly and season reports
 as PDFs in English or Italian, and has widgets for birthdays, payments and the next practice. On
-TestFlight now as CoachBoard.
+TestFlight now.
 
 *SwiftUI · SwiftData + CloudKit · WidgetKit · on-device translation with ML Kit*
 
-![Tracker: kids get marked as paid, a birthday pops confetti, then the translator turns HELLO into BOK](art/tracker.gif)
+![CoachBoard: kids get marked as paid, a birthday pops confetti, then the translator turns HELLO into BOK](art/tracker.gif)
 
 ### <img src="assets/capjo.png" width="30" align="absmiddle"> [CapJo](https://github.com/AleSignorile12/CapJo)
 
