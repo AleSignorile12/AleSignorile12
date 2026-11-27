@@ -59,13 +59,14 @@ and wait for Santa to fly by.
 
 ### <img src="assets/tracker.png" width="30" align="absmiddle"> [CoachBoard](https://github.com/AleSignorile12/CoachBoard)
 
-An iPhone app for coaching kids: the team list, who's paid this month, which documents are still
-missing, birthdays, the practice calendar, and an offline translator for talking with kids who speak
-another language. It syncs through iCloud, can lock with Face ID, makes monthly and season reports
-as PDFs in English or Italian, and has widgets for birthdays, payments and the next practice. You
-set your own fees, and the court of your sport sits behind the app. On TestFlight now.
+An iPhone and Mac app for coaching kids: the team list, who's paid this month, which documents are
+still missing, birthdays, the practice calendar, and a translator for talking with kids who speak
+another language. On the Mac it has a glass sidebar and sortable tables; everything syncs between the
+two through iCloud. Your own fee plans (monthly, quarterly or yearly), an optional registration, any
+currency and one-off charges like a kit or a tournament. It can lock with Face ID, makes monthly and
+season reports as PDFs, and has widgets for birthdays, payments and the next practice. On TestFlight now.
 
-*SwiftUI · SwiftData + CloudKit · WidgetKit · on-device translation with ML Kit*
+*SwiftUI · Mac Catalyst · SwiftData + CloudKit · WidgetKit · translation with ML Kit and Apple Translation*
 
 ![CoachBoard: kids get marked as paid, a birthday pops confetti, then the translator turns HELLO into BOK](art/tracker.gif)
 
