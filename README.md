@@ -62,8 +62,8 @@ and wait for Santa to fly by.
 An iPhone app for coaching kids: the team list, who's paid this month, which documents are still
 missing, birthdays, the practice calendar, and an offline translator for talking with kids who speak
 another language. It syncs through iCloud, can lock with Face ID, makes monthly and season reports
-as PDFs in English or Italian, and has widgets for birthdays, payments and the next practice. On
-TestFlight now.
+as PDFs in English or Italian, and has widgets for birthdays, payments and the next practice. You
+set your own fees, and the court of your sport sits behind the app. On TestFlight now.
 
 *SwiftUI · SwiftData + CloudKit · WidgetKit · on-device translation with ML Kit*
 
